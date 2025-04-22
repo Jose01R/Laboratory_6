@@ -35,6 +35,40 @@ class StackTest {
 
     }
 
+    @Test
+    public void isBalanceTest(){
+        // PROBAMOS ISBALANCED
+        try {
+            System.out.println(isBalanced("([])"));   // true
+            System.out.println(isBalanced("{[(])}")); // false
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // METODO BALANCEO
+    public boolean isBalanced(String expression) throws StackException {
+        ArrayStack stack = new ArrayStack(expression.length());
+
+        for (char character : expression.toCharArray()){
+            if (character == '(' || character == '[' || character == '{') {  // CORRECCIÓN AQUÍ
+                stack.push(character);
+            } else if (character == ')' || character == ']' || character == '}'){
+                if (stack.isEmpty())
+                    return false;
+                char last = (char)stack.pop();
+
+                if ((character == ')' && last != '(') ||  // CORRECCIÓN AQUÍ
+                    (character == ']' && last != '[') ||
+                    (character == '}' && last != '{')){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
 
 
 }
