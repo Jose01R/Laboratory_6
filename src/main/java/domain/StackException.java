@@ -1,4 +1,4 @@
-package ucr.lab.domain;
+package domain;
 
 public class StackException extends Exception {
     public StackException(String message) {

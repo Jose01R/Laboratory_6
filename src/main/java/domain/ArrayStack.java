@@ -1,4 +1,4 @@
-package ucr.lab.domain;
+package domain;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package ucr.lab.domain;
+package domain;
 
 public interface Stack {
     public int size(); // devuelve el número de elementos en la pila

@@ -1,8 +1,8 @@
 package ucr.lab.domain;
 
+import domain.ArrayStack;
+import domain.StackException;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StackTest {
 
