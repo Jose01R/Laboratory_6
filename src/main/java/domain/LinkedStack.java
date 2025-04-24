@@ -43,6 +43,7 @@ public class LinkedStack implements Stack {
     @Override
     public void push(Object element) throws StackException {
         Node newNode = new Node(element);
+
         newNode.next = top;
         top = newNode;
         counter++;
@@ -61,15 +62,25 @@ public class LinkedStack implements Stack {
 
     @Override
     public String toString() {
-        if (isEmpty()) return "Linked Stack list is empty";
+        if (isEmpty()) return "Linked Stack is empty";
+        String result = "Linked Stack Content: \n";
 
-        String result = "Linked Stack list Content\n";
-        Node aux = top; //aux para moverme por la lista y no perder el puntero al inicio
+        try{
+            LinkedStack aux = new LinkedStack();
+            while (!isEmpty()){
+                result+=peek() + " \n";
+                aux.push(pop());
+            }
 
-        while (aux!=null){
-            result+= aux.data + "\n";
-            aux = aux.next; // LO muevo AL SIGUIENTE NODO
+            //DEVUELVE LA PILA A SU ESTADO ORIGINAL
+            while (!aux.isEmpty()){
+                push(aux.pop());
+            }
+
+        }catch (StackException ex){
+            System.out.println(ex.getMessage());
         }
+
         return result;
     }
 }

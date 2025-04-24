@@ -8,32 +8,118 @@ class LinkedStackTest {
 
     @Test
     public void testLinkedStack(){
-        LinkedStack linked = new LinkedStack();
+        LinkedStack stack = new LinkedStack();;
+        try {
 
-        try{
-            //uso del metodo push que mete los objetos en el tope
-            linked.push("A");
-            linked.push("B");
-            linked.push("C");
+            for (int i = 0; i < 10; i++) {
+                int value = util.Utility.random(30);
+                System.out.println("Value [" +value+ "] pushed");
+                stack.push(value);
+            }
 
-            System.out.println(linked);
-            //uso del metodo pop, elimina y muestra el top, y luego muestro la lista actualizada
-            System.out.println("Object deleted: \n" + linked.pop());
-            System.out.println(linked);
+            System.out.println(stack);
 
-            //metodos que me danel objeto que esta en el tope
-            System.out.println("Objeto que esta en el tope: \n" + linked.peek());
-            System.out.println("Objeto que esta en el tope: \n" + linked.top());
-            //metodo size, que muestras cuantos objetos en la pila hay, me da counter
-            System.out.println("Tamaño de la Pila: " + linked.size());
+            System.out.println(stack); // llamo de nuevo al toString
 
-            linked.clear();
-            System.out.println("¿Esta limpia la pila? \n" + linked);
+            System.out.println("OBJECT DELETED: \n" + stack.pop());
 
-            System.out.println("¿Esta vacia la pila? " + linked.isEmpty());
+            System.out.println("OBJETO EN LA CIMA: " + stack.peek());
+            System.out.println("OBJETO EN LA CIMA: " + stack.top());
+
+            System.out.println("SIZE: \n" + stack.size());
+
+            stack.clear();
+            System.out.println("IS CLEAR? \n" + stack);
+
+            System.out.println("IS EMPTY? " + stack.isEmpty());
 
         } catch (StackException e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    public void isBalanceTest(){
+        // PROBAMOS ISBALANCED
+        try {
+            System.out.println(isBalanced("({[]})"));   // true
+            System.out.println(isBalanced("([])")); // true
+            System.out.println(isBalanced("([)]")); // false
+            System.out.println(isBalanced("((()))")); // true
+            System.out.println(isBalanced("{[}")); // false
+            System.out.println(isBalanced("]")); // false
+            System.out.println(isBalanced("")); // true
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void decimalToBinary(){
+            try {
+                int[] numbers = {0, 3, 4, 5, 6, 7, 9, 10, 15, 17, 23, 32, 255, 1023, 1025, 4192, 8586};
+                for (int value : numbers) {
+                    System.out.println("Decimal: " + value + " → Binary: " + decimalToBinary(value));
+                }
+            } catch (StackException e) {
+                throw new RuntimeException(e);
+            }
+
+    }
+
+    @Test
+    public void infixToPosfixTest(){
+        try {
+            System.out.println("infix: ((a-b)*(a+c)) to posfix: " + util.Utility.infixToPostfixConverter("((a-b)*(a+c))"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    // METODO BALANCEO
+    public boolean isBalanced(String expression) throws StackException {
+        LinkedStack stack = new LinkedStack();
+
+        for (char character : expression.toCharArray()){
+            if (character == '(' || character == '[' || character == '{') {  // CORRECCIÓN AQUÍ
+                stack.push(character);
+            } else if (character == ')' || character == ']' || character == '}'){
+                if (stack.isEmpty())
+                    return false;
+                char last = (char)stack.pop();
+
+                if ((character == ')' && last != '(') ||  // CORRECCIÓN AQUÍ
+                        (character == ']' && last != '[') ||
+                        (character == '}' && last != '{')){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public String decimalToBinary(int number) throws StackException {
+        LinkedStack linkedStack = new LinkedStack();
+        String result = "";
+        int resto;
+
+        if (number == 0) return "0";
+
+        while (number>0) {
+            resto = number%2;
+            number = number/2;
+
+            linkedStack.push(Integer.toString(resto));
+        }
+
+        if (linkedStack.isEmpty()) return "Linked Stack is empty";
+
+        while (!linkedStack.isEmpty()){
+            result+=linkedStack.pop() + "";
+        }
+
+        return result;
+    }
+
 }

@@ -8,19 +8,23 @@ class StackTest {
 
     @Test
     void ArrayStackTest() {
-        ArrayStack stack = new ArrayStack(3);;
-
+        ArrayStack stack = new ArrayStack(10);;
         try {
-            stack.push("A");
-            stack.push("B");
-            stack.push("C");
+
+            for (int i = 0; i < 10; i++) {
+                int value = util.Utility.random(30);
+                System.out.println("Value [" +value+ "] pushed");
+                stack.push(value);
+            }
 
             System.out.println(stack);
 
+            System.out.println(stack); // llamo de nuevo al toString
+
             System.out.println("OBJECT DELETED: \n" + stack.pop());
 
-            System.out.println("OBJETO EN LA CIMA: \n" + stack.peek());
-            System.out.println("OBJETO EN LA CIMA: \n" + stack.top());
+            System.out.println("OBJETO EN LA CIMA: " + stack.peek());
+            System.out.println("OBJETO EN LA CIMA: " + stack.top());
 
             System.out.println("SIZE: \n" + stack.size());
 

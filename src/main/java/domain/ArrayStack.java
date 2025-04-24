@@ -4,15 +4,9 @@ import java.util.Arrays;
 
 public class ArrayStack implements Stack{
 
-    private int n; // CAPACIDAD DE LA PILA
+    private int n; // CAPACIDAD DE LA PILA - TAM MAX
     private int top; // CIMA - TOPE
     private Object[] dataStack;
-
-    public ArrayStack(int n, int top, Object[] dataStack) {
-        this.n = n;
-        this.top = top;
-        this.dataStack = dataStack;
-    }
 
     public ArrayStack(int n) {
         this.n = n;
@@ -78,7 +72,7 @@ public class ArrayStack implements Stack{
     @Override
     public void push(Object element) throws StackException {
         if (top == n-1)
-            throw new StackException("Array Stack is empty");
+            throw new StackException("Array Stack is FULL");
 
         dataStack[++top] = element;
     }
@@ -93,8 +87,26 @@ public class ArrayStack implements Stack{
 
     @Override
     public String toString() {
-        return "ArrayStack: " +
-                "dataStack=" + Arrays.toString(dataStack);
+        if (isEmpty()) return "Array Stack is empty";
+        String result = "Array Stack Content: \n";
+
+        try{
+            ArrayStack aux = new ArrayStack(size());
+            while (!isEmpty()){
+                result+=peek() + " \n";
+                aux.push(pop());
+            }
+
+            //DEVUELVE LA PILA A SU ESTADO ORIGINAL
+            while (!aux.isEmpty()){
+                push(aux.pop());
+            }
+
+        }catch (StackException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return result;
     }
 
 
