@@ -9,8 +9,9 @@ public class ArrayStack implements Stack{
     private Object[] dataStack;
 
     public ArrayStack(int n) {
+        if(n<=0) System.exit(1); //se sale
         this.n = n;
-        this.top = -1;
+        this.top = -1; //indica q la pila esta vacia
         this.dataStack = new Object[n];
     }
 
