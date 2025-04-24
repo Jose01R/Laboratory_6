@@ -37,7 +37,7 @@
    <center>
       <AnchorPane fx:id="ap" prefHeight="769.0" prefWidth="816.0" style="-fx-background-color: #141428;" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="txtMessage" fill="#f7f7f7" layoutX="4.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laboratory No. 5" textAlignment="CENTER" wrappingWidth="781.94921875">
+            <Text fx:id="txtMessage" fill="#f7f7f7" layoutX="4.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laboratory No. 6" textAlignment="CENTER" wrappingWidth="781.94921875">
                <font>
                   <Font name="Arial" size="40.0" />
                </font>
