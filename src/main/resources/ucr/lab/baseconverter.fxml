@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="503.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BaseConverterController">
+   <children>
+      <Pane prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: aadf7d;">
+         <children>
+            <Text layoutX="90.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Base converter(Linked Stack)">
+               <font>
+                  <Font name="Arial" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutY="75.0" prefHeight="427.0" prefWidth="600.0" style="-fx-background-color: #d5e57d;">
+         <children>
+            <Text layoutX="60.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Decimal value:">
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Text>
+            <TextField fx:id="textField" layoutX="207.0" layoutY="43.0" />
+            <Pane layoutX="14.0" layoutY="94.0" prefHeight="101.0" prefWidth="566.0" style="-fx-background-color: #b9c192;">
+               <children>
+                  <RadioButton fx:id="binaryRadioButton" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Binary">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="hexaRadioButton" layoutX="321.0" layoutY="51.0" mnemonicParsing="false" text="Hexadecimal">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="octalRadioButton" layoutX="184.0" layoutY="52.0" mnemonicParsing="false" text="Octal">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </Pane>
+            <Pane layoutX="14.0" layoutY="203.0" prefHeight="122.0" prefWidth="566.0">
+               <children>
+                  <Text layoutX="30.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:">
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </Text>
+                  <TextArea fx:id="textArea" layoutX="112.0" layoutY="42.0" prefHeight="38.0" prefWidth="420.0" />
+               </children>
+            </Pane>
+            <Button layoutX="112.0" layoutY="342.0" mnemonicParsing="false" onAction="#convertOnAction" text="Convert">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="257.0" layoutY="342.0" mnemonicParsing="false" onAction="#clearOnAction" text="Clear">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
