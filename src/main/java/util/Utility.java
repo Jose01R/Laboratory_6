@@ -130,7 +130,7 @@ public class Utility {
 
             } else if (isOperator(c)) { // Si el elemento es un operador se extraen dos elementos del tope de la pila
                 if (expStack.size() < 2 || evalStack.size() < 2)
-                    throw new StackException("Invald PosFix expression");
+                    throw new StackException("Invalid PosFix expression");
 
                 // Se crea la expresion
                 String op2 = (String) expStack.pop();
@@ -161,11 +161,51 @@ public class Utility {
     }
 
 
-    public static String posFixToPrefix(String exp){
-        LinkedStack expStack = new LinkedStack();  
+    public static String posFixToPrefix(String exp) throws StackException {
+        LinkedStack expStack = new LinkedStack();
+        LinkedStack evalStack = new LinkedStack();  // calcular el valor
 
+        boolean canEvaluate = true; //Lleva el control para evaluar la expresion
 
-        return "";
+        for (char c : exp.toCharArray()){
+
+            //Si el carácter es un operando se apila
+            if (Character.isLetterOrDigit(c)){
+                expStack.push(Character.toString(c));
+
+                if (Character.isDigit(c)) {
+                    evalStack.push(Character.getNumericValue(c));
+                } else {
+                    canEvaluate = false; // Si no es numero no se evalua
+                }
+
+            }else if (isOperator(c)) { // Si el elemento es un operador se extraen dos elementos del tope
+                String pop1 = (String) expStack.pop();
+                String pop2 = (String) expStack.pop();
+                String result = c + pop2 + pop1;
+
+                // d. El resultado anterior se almacena en el tope de la pila
+                expStack.push(result);
+
+                // Se resuelve la expresion
+                if (canEvaluate) {
+                    int val1 = (int) evalStack.pop();
+                    int val2 = (int) evalStack.pop();
+                    int resultEval = applyOperator(val2, val1, c);
+                    evalStack.push(resultEval);
+                }
+            }
+        }
+
+        //CONVIERTO STRING LA EXPRESION
+        String prefixResult = (String) expStack.pop();
+
+        if (canEvaluate) {
+            int finalValue = (int) evalStack.pop();
+            return prefixResult + " = " + finalValue;
+        } else {
+            return prefixResult;
+        }
     }
 
     public static String infixToPrefix(String exp) throws StackException {
@@ -182,22 +222,23 @@ public class Utility {
             else
                 reversedExp.push(c);
         }
-
+        //Convierto pila a una cadena String
         String reverseString = "";
         while (!reversedExp.isEmpty()){
             reverseString += reversedExp.pop();
         }
 
+        // Paso 2: Convertir a Posfix
         String posFix = infixToPostfixConverter(reverseString);
 
+        // Paso 3: Invertir resultado de la conversion a posfix
         for (char ch : posFix.toCharArray())
-            resultStack.push(ch);
+            resultStack.push(ch); // Se obtiene el exp prefijo
 
         String prefixString = "";
         while (!resultStack.isEmpty()){
             prefixString += resultStack.pop();
         }
-
 
         return prefixString;
     }
@@ -213,7 +254,7 @@ public class Utility {
             case '-' -> a - b;
             case '*' -> a * b;
             case '/' -> a / b;
-            default -> throw new IllegalArgumentException("Operador inválido: " + op);
+            default -> throw new IllegalArgumentException("Invalid Opertor: " + op);
         };
     }
 

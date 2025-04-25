@@ -94,6 +94,15 @@ class LinkedStackTest {
         }
     }
 
+    @Test
+    public void posfixToPrefixTest(){
+        try {
+            System.out.println("posfix: 5 9 + 2 * 6 5 * + to prefix: " + util.Utility.posFixToPrefix("5 9 + 2 * 6 5 * +"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // METODO BALANCEO
     public boolean isBalanced(String expression) throws StackException {
         LinkedStack stack = new LinkedStack();
