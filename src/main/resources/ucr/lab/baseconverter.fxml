@@ -4,6 +4,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -34,13 +35,16 @@
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="numberType" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="hexaRadioButton" layoutX="321.0" layoutY="51.0" mnemonicParsing="false" text="Hexadecimal">
+                  <RadioButton fx:id="hexaRadioButton" layoutX="321.0" layoutY="51.0" mnemonicParsing="false" text="Hexadecimal" toggleGroup="$numberType">
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="octalRadioButton" layoutX="184.0" layoutY="52.0" mnemonicParsing="false" text="Octal">
+                  <RadioButton fx:id="octalRadioButton" layoutX="184.0" layoutY="52.0" mnemonicParsing="false" text="Octal" toggleGroup="$numberType">
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>
