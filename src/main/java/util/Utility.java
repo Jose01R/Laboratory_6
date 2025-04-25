@@ -90,6 +90,8 @@ public class Utility {
         return new SimpleDateFormat("dd/MM/yyyy").format(value);
     }
 
+            // ---------- METODOS PARA INFIJO CONVERTER ----------------
+
     public static String infixToPostfixConverter(String exp) throws StackException {
         LinkedStack stack = new LinkedStack();
         String expPostFix = "";
@@ -115,6 +117,43 @@ public class Utility {
             expPostFix+=stack.pop();
         return expPostFix;
     }
+
+    public static String infixToPrefix(String exp) throws StackException {
+        LinkedStack resultStack = new LinkedStack();      // Pila para el resultado
+
+        // Paso 1: Invertir expresión y cambiar paréntesis
+        LinkedStack reversedExp = new LinkedStack();
+
+        for(char c : exp.toCharArray()) {
+            if (c == '(')
+                reversedExp.push(')');
+            else if (c == ')')
+                reversedExp.push('(');
+            else
+                reversedExp.push(c);
+        }
+        //Convierto pila a una cadena String
+        String reverseString = "";
+        while (!reversedExp.isEmpty()){
+            reverseString += reversedExp.pop();
+        }
+
+        // Paso 2: Convertir a Posfix
+        String posFix = infixToPostfixConverter(reverseString);
+
+        // Paso 3: Invertir resultado de la conversion a posfix
+        for (char ch : posFix.toCharArray())
+            resultStack.push(ch); // Se obtiene el exp prefijo
+
+        String prefixString = "";
+        while (!resultStack.isEmpty()){
+            prefixString += resultStack.pop();
+        }
+
+        return prefixString;
+    }
+
+        // --------------------- METODOS PARA POSFIJO CONVERTER -------------------
 
     public static String postfixToInfixConverter(String exp) throws StackException {
         LinkedStack expStack = new LinkedStack();  // expresión infix
@@ -208,45 +247,115 @@ public class Utility {
         }
     }
 
-    public static String infixToPrefix(String exp) throws StackException {
-        LinkedStack resultStack = new LinkedStack();      // Pila para el resultado
+        // -------------- METODOS PARA PREFIJO CONVERTER --------------------
 
-        // Paso 1: Invertir expresión y cambiar paréntesis
-        LinkedStack reversedExp = new LinkedStack();
+    public static String prefixToInfix(String exp) throws StackException {
+        LinkedStack expStack = new LinkedStack();  // expresión infix
+        LinkedStack evalStack = new LinkedStack();  // calcular el valor
+        String prefixResult = "";
+        boolean canEvaluate = true; //Lleva el control para evaluar la expresion
 
-        for(char c : exp.toCharArray()) {
-            if (c == '(')
-                reversedExp.push(')');
-            else if (c == ')')
-                reversedExp.push('(');
-            else
-                reversedExp.push(c);
+        for (int i = exp.length() - 1; i >= 0; i--) {
+            char c = exp.charAt(i);
+
+            // Si el elemento es un operando se agrega a una pila
+            if (Character.isLetterOrDigit(c)) {
+                expStack.push(Character.toString(c));
+                if (Character.isDigit(c)) {
+                    evalStack.push(Character.getNumericValue(c));
+                } else {
+                    canEvaluate = false; // Si no es numero no se evalua
+                }
+
+            } else if (isOperator(c)) { // Si el elemento es un operador se extraen dos elementos del tope de la pila
+
+                // Se crea la expresion
+                String op1 = (String) expStack.pop();
+                String op2 = (String) expStack.pop();
+                String newExpr = "(" + op1 + c + op2 + ")"; //RESULTADO
+
+                //d. El resultado anterior se almacena en el tope de la pila
+                expStack.push(newExpr);
+
+                // Se resuelve la expresion
+                if (canEvaluate) {
+                    int val1 = (int) evalStack.pop();
+                    int val2 = (int) evalStack.pop();
+                    int resultEval = applyOperator(val1, val2, c);
+                    evalStack.push(resultEval);
+                }
+            } else {
+                throw new StackException("Invalid character: " + c);
+            }
         }
-        //Convierto pila a una cadena String
-        String reverseString = "";
-        while (!reversedExp.isEmpty()){
-            reverseString += reversedExp.pop();
+
+        prefixResult = (String) expStack.pop();
+
+        //retorna el valor del tope de la pila
+        if (canEvaluate) {
+            int finalValue = (int) evalStack.pop();
+            return prefixResult + " = " + finalValue;
+        } else {
+            return prefixResult;
+        }
+    }
+
+    public static String prefixToPosFix(String exp) throws StackException {
+        LinkedStack expStack = new LinkedStack();  // expresión infix
+        LinkedStack evalStack = new LinkedStack();  // calcular el valor
+        String posfixResult = "";
+        boolean canEvaluate = true; //Lleva el control para evaluar la expresion
+
+        for (int i = exp.length() - 1; i >= 0; i--) {
+            char c = exp.charAt(i);
+
+            // Si el elemento es un operando se agrega a una pila
+            if (Character.isLetterOrDigit(c)) {
+                expStack.push(Character.toString(c));
+                if (Character.isDigit(c)) {
+                    evalStack.push(Character.getNumericValue(c));
+                } else {
+                    canEvaluate = false; // Si no es numero no se evalua
+                }
+
+            } else if (isOperator(c)) { // Si el elemento es un operador se extraen dos elementos del tope de la pila
+
+                // Se crea la expresion
+                String op1 = (String) expStack.pop();
+                String op2 = (String) expStack.pop();
+                String newExpr = op1 + op2 + c; //RESULTADO
+
+                //d. El resultado anterior se almacena en el tope de la pila
+                expStack.push(newExpr);
+
+                // Se resuelve la expresion
+                if (canEvaluate) {
+                    int val1 = (int) evalStack.pop();
+                    int val2 = (int) evalStack.pop();
+                    int resultEval = applyOperator(val1, val2, c);
+                    evalStack.push(resultEval);
+                }
+            } else {
+                throw new StackException("Invalid character: " + c);
+            }
         }
 
-        // Paso 2: Convertir a Posfix
-        String posFix = infixToPostfixConverter(reverseString);
+        posfixResult = (String) expStack.pop();
 
-        // Paso 3: Invertir resultado de la conversion a posfix
-        for (char ch : posFix.toCharArray())
-            resultStack.push(ch); // Se obtiene el exp prefijo
-
-        String prefixString = "";
-        while (!resultStack.isEmpty()){
-            prefixString += resultStack.pop();
+        //retorna el valor del tope de la pila
+        if (canEvaluate) {
+            int finalValue = (int) evalStack.pop();
+            return posfixResult + " = " + finalValue;
+        } else {
+            return posfixResult;
         }
-
-        return prefixString;
     }
 
 
     private static boolean isOperator(char c) {
-        return c == '+' || c == '-' || c == '*' || c == '/';
+        return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
     }
+
 
     private static int applyOperator(int a, int b, char op) {
         return switch (op) {
@@ -254,9 +363,12 @@ public class Utility {
             case '-' -> a - b;
             case '*' -> a * b;
             case '/' -> a / b;
-            default -> throw new IllegalArgumentException("Invalid Opertor: " + op);
+            case '^' -> (int) Math.pow(a, b); // Añado soporte para ^
+            default -> throw new IllegalArgumentException("Invalid Operator: " + op);
         };
     }
+
+
 
     private static int getPriority(char operator) {
         switch (operator){

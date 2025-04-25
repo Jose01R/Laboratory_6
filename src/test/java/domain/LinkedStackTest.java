@@ -91,19 +91,11 @@ class LinkedStackTest {
 
     }
 
+        // TEST DE INFIX CONVERTER
     @Test
     public void infixToPosfixTest(){
         try {
             System.out.println("infix: ((a-b)*(a+c)) to posfix: " + util.Utility.infixToPostfixConverter("(2*(1+((4*(2+1))+3)))"));
-        } catch (StackException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void postfixToInfixTest(){
-        try {
-            System.out.println("posFix: 21421+*3++* to infix: " + util.Utility.postfixToInfixConverter("21421+*3++*"));
         } catch (StackException e) {
             throw new RuntimeException(e);
         }
@@ -118,6 +110,10 @@ class LinkedStackTest {
         }
     }
 
+    // -----------------------CONVERTER TEST--------------------------------- //
+
+
+    // TEST DE POSFIX CONVERTER
     @Test
     public void posfixToPrefixTest(){
         try {
@@ -127,7 +123,37 @@ class LinkedStackTest {
         }
     }
 
-    // METODO BALANCEO
+    @Test
+    public void postfixToInfixTest(){
+        try {
+            System.out.println("posFix: 21421+*3++* to infix: " + util.Utility.postfixToInfixConverter("21421+*3++*"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        // TEST DE PREFIX CONVERTER
+    @Test
+    public void prefixToInfixTest(){
+        try {
+            System.out.println("prefix: *-ab+ac + to infix: " + util.Utility.prefixToInfix("*-ab+ac"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void prefixToPosFixTest(){
+        try {
+            System.out.println("prefix: **-36-42^32 to posfix: " + util.Utility.prefixToPosFix("**-36-42^32"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ----------------------------BALANCED TEST---------------------------- //
+
+        // METODO BALANCEO
     public boolean isBalanced(String expression) throws StackException {
         LinkedStack stack = new LinkedStack();
 
