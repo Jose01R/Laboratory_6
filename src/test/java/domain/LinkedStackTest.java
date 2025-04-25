@@ -2,8 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LinkedStackTest {
 
     @Test
@@ -55,15 +53,41 @@ class LinkedStackTest {
     }
 
     @Test
-    public void decimalToBinary(){
+    public void decimalToBinaryTest(){
             try {
                 int[] numbers = {0, 3, 4, 5, 6, 7, 9, 10, 15, 17, 23, 32, 255, 1023, 1025, 4192, 8586};
                 for (int value : numbers) {
-                    System.out.println("Decimal: " + value + " → Binary: " + decimalToBinary(value));
+                    System.out.println("Decimal: " + value + " → Binary: " + util.Utility.decimalToBinary(value));
                 }
             } catch (StackException e) {
                 throw new RuntimeException(e);
             }
+
+    }
+
+    @Test
+    public void decimalToOctalTest(){
+        try {
+            int[] numbers = {0, 3, 4, 5, 6, 7, 8, 9, 10, 15, 16, 17, 23, 24, 32};
+            for (int value : numbers) {
+                System.out.println("Decimal: " + value + " → Octal: " + util.Utility.decimalToOctal(value));
+            }
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Test
+    public void decimalToHexaDecimalTest(){
+        try {
+            int[] numbers = {0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 23, 24, 32, 1010, 2748};
+            for (int value : numbers) {
+                System.out.println("Decimal: " + value + " → HexaDecimal: " + util.Utility.decimalToHexaDecimal(value));
+            }
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -125,27 +149,27 @@ class LinkedStackTest {
         return stack.isEmpty();
     }
 
-    public String decimalToBinary(int number) throws StackException {
-        LinkedStack linkedStack = new LinkedStack();
-        String result = "";
-        int resto;
-
-        if (number == 0) return "0";
-
-        while (number>0) {
-            resto = number%2;
-            number = number/2;
-
-            linkedStack.push(Integer.toString(resto));
-        }
-
-        if (linkedStack.isEmpty()) return "Linked Stack is empty";
-
-        while (!linkedStack.isEmpty()){
-            result+=linkedStack.pop() + "";
-        }
-
-        return result;
-    }
+//    public String decimalToBinary(int number) throws StackException {
+//        LinkedStack linkedStack = new LinkedStack();
+//        String result = "";
+//        int resto;
+//
+//        if (number == 0) return "0";
+//
+//        while (number>0) {
+//            resto = number%2;
+//            number = number/2;
+//
+//            linkedStack.push(Integer.toString(resto));
+//        }
+//
+//        if (linkedStack.isEmpty()) return "Linked Stack is empty";
+//
+//        while (!linkedStack.isEmpty()){
+//            result+=linkedStack.pop() + "";
+//        }
+//
+//        return result;
+//    }
 
 }

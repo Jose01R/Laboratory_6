@@ -267,4 +267,103 @@ public class Utility {
         return -1;
     }
 
+
+    public static String decimalToBinary(int number) throws StackException {
+        LinkedStack linkedStack = new LinkedStack();
+        String result = "";
+        int resto;
+
+        if (number == 0) return "0";
+
+        while (number>0) {
+            resto = number%2;
+            number = number/2;
+
+            linkedStack.push(Integer.toString(resto));
+        }
+
+        if (linkedStack.isEmpty()) return "Linked Stack is empty";
+
+        while (!linkedStack.isEmpty()){
+            result+=linkedStack.pop() + "";
+        }
+
+        return result;
+    }
+
+    public static String decimalToOctal(int number) throws StackException {
+        LinkedStack linkedStack = new LinkedStack();
+        String result = "";
+        int resto;
+
+        if (number == 0) return "0";
+
+        while (number>0) {
+            resto = number%8;
+            number = number/8;
+
+            linkedStack.push(Integer.toString(resto));
+        }
+
+        if (linkedStack.isEmpty()) return "Linked Stack is empty";
+
+        while (!linkedStack.isEmpty()){
+            result+=linkedStack.pop() + "";
+        }
+
+        return result;
+    }
+
+    public static String decimalToHexaDecimal(int number) throws StackException {
+        LinkedStack linkedStack = new LinkedStack();
+        String result = "";
+        int resto;
+
+        if (number == 0) return "0";
+
+        while (number>0) {
+            resto = number%16;
+            number = number/16;
+
+            //pueden ser if aninados diciendo que si number%16 me da entre 10 y 15, lo que guarde en linkedStack sea una letra
+            if (resto >= 10 && resto <= 15) {
+                char hexChar;
+                switch (resto) {
+                    case 10:
+                        hexChar = 'A';
+                        break;
+                    case 11:
+                        hexChar = 'B';
+                        break;
+                    case 12:
+                        hexChar = 'C';
+                        break;
+                    case 13:
+                        hexChar = 'D';
+                        break;
+                    case 14:
+                        hexChar = 'E';
+                        break;
+                    case 15:
+                        hexChar = 'F';
+                        break;
+                    default:
+                        // Esto no debería ocurrir con el if anterior, pero es buena para prevenir
+                        hexChar = '?';
+                        break;
+                }
+                linkedStack.push(Character.toString(hexChar));
+            } else {
+                linkedStack.push(Integer.toString(resto));
+            }
+        }
+
+        if (linkedStack.isEmpty()) return "Linked Stack is empty";
+
+        while (!linkedStack.isEmpty()){
+            result+=linkedStack.pop() + "";
+        }
+
+        return result;
+    }
 }
