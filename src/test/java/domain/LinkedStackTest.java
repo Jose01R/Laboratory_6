@@ -70,12 +70,29 @@ class LinkedStackTest {
     @Test
     public void infixToPosfixTest(){
         try {
-            System.out.println("infix: ((a-b)*(a+c)) to posfix: " + util.Utility.infixToPostfixConverter("((a-b)*(a+c))"));
+            System.out.println("infix: ((a-b)*(a+c)) to posfix: " + util.Utility.infixToPostfixConverter("(2*(1+((4*(2+1))+3)))"));
         } catch (StackException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Test
+    public void postfixToInfixTest(){
+        try {
+            System.out.println("posFix: 21421+*3++* to infix: " + util.Utility.postfixToInfixConverter("21421+*3++*"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void infixToPrefixTest(){
+        try {
+            System.out.println("infix: ((a-b)*(a+c)) to prefix: " + util.Utility.infixToPrefix("((a-b)*(a+c))"));
+        } catch (StackException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // METODO BALANCEO
     public boolean isBalanced(String expression) throws StackException {
