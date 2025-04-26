@@ -15,9 +15,9 @@
    <children>
       <Pane prefHeight="62.0" prefWidth="600.0" style="-fx-background-color: #73b147;">
          <children>
-            <Text layoutX="97.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arithmetic expresion converter">
+            <Text layoutX="97.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arithmetic Expresion Converter">
                <font>
-                  <Font name="Arial" size="27.0" />
+                  <Font name="Arial Bold" size="27.0" />
                </font>
             </Text>
          </children>
@@ -28,7 +28,7 @@
                <children>
                   <RadioButton fx:id="prefixRadioButton" layoutX="44.0" layoutY="35.0" mnemonicParsing="false" text="Prefix">
                      <font>
-                        <Font name="Arial" size="20.0" />
+                        <Font name="Arial Bold" size="20.0" />
                      </font>
                      <toggleGroup>
                         <ToggleGroup fx:id="arithmeticConverterTypes" />
@@ -36,12 +36,12 @@
                   </RadioButton>
                   <RadioButton fx:id="postfixRadioButton" layoutX="378.0" layoutY="35.0" mnemonicParsing="false" text="Postfix" toggleGroup="$arithmeticConverterTypes">
                      <font>
-                        <Font name="Arial" size="20.0" />
+                        <Font name="Arial Bold" size="20.0" />
                      </font>
                   </RadioButton>
                   <RadioButton fx:id="infixRadioButton" layoutX="213.0" layoutY="35.0" mnemonicParsing="false" text="Infix" toggleGroup="$arithmeticConverterTypes">
                      <font>
-                        <Font name="Arial" size="20.0" />
+                        <Font name="Arial Bold" size="20.0" />
                      </font>
                   </RadioButton>
                </children>
@@ -50,36 +50,45 @@
                <children>
                   <Text layoutX="43.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expression:">
                      <font>
-                        <Font name="Arial" size="20.0" />
+                        <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="textField" layoutX="167.0" layoutY="38.0" prefHeight="30.0" prefWidth="249.0" />
+                  <TextField fx:id="textField" layoutX="173.0" layoutY="33.0" prefHeight="44.0" prefWidth="249.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font></TextField>
                </children>
             </Pane>
             <Pane layoutX="13.0" layoutY="237.0" prefHeight="129.0" prefWidth="574.0" style="-fx-background-color: #afdb91;">
                <children>
-                  <TextArea fx:id="textArea1" layoutX="126.0" layoutY="13.0" prefHeight="39.0" prefWidth="365.0" />
-                  <TextArea fx:id="textArea2" layoutX="126.0" layoutY="66.0" prefHeight="39.0" prefWidth="365.0" />
-                  <Label fx:id="labelPrefix" layoutX="57.0" layoutY="18.0" text="Prefix">
+                  <TextArea fx:id="textArea1" layoutX="126.0" layoutY="16.0" prefHeight="39.0" prefWidth="365.0">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="Arial Bold" size="15.0" />
+                     </font></TextArea>
+                  <TextArea fx:id="textArea2" layoutX="126.0" layoutY="69.0" prefHeight="39.0" prefWidth="365.0">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font></TextArea>
+                  <Label fx:id="labelPrefix" layoutX="57.0" layoutY="23.0" text="Prefix">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelPostfix" layoutX="52.0" layoutY="71.0" text="Postfix">
+                  <Label fx:id="labelPostfix" layoutX="52.0" layoutY="76.0" text="Postfix">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button layoutX="97.0" layoutY="403.0" mnemonicParsing="false" onAction="#convertOnAction" text="Convert">
+            <Button layoutX="115.0" layoutY="391.0" mnemonicParsing="false" onAction="#convertOnAction" prefHeight="51.0" prefWidth="133.0" text="Convert">
                <font>
-                  <Font name="Arial" size="21.0" />
+                  <Font name="Arial Bold" size="21.0" />
                </font>
             </Button>
-            <Button layoutX="246.0" layoutY="403.0" mnemonicParsing="false" onAction="#cleanOnAction" text="Clean">
+            <Button layoutX="322.0" layoutY="391.0" mnemonicParsing="false" onAction="#cleanOnAction" prefHeight="51.0" prefWidth="133.0" text="Clean">
                <font>
-                  <Font name="Arial" size="21.0" />
+                  <Font name="Arial Bold" size="21.0" />
                </font>
             </Button>
          </children>
