@@ -84,19 +84,19 @@ public class ArithmeticConverterController {
             if (infixRadioButton.isSelected()) {
                 String resultPost = util.Utility.infixToPostfixConverter(textField.getText());
                 String resultPre = util.Utility.infixToPrefix(textField.getText());
-                textArea2.setText(resultPre);
-                textArea1.setText(resultPost);
+                textArea1.setText(resultPre);
+                textArea2.setText(resultPost);
             }else if(postfixRadioButton.isSelected()){
                 String resultPre = util.Utility.posFixToPrefix(textField.getText());
                 String resultInfix = util.Utility.postfixToInfixConverter(textField.getText());
-                textArea2.setText(resultPre);
-                textArea1.setText(resultInfix);
+                textArea1.setText(resultPre);
+                textArea2.setText(resultInfix);
             }else if(prefixRadioButton.isSelected()){
 
                 String resultPost = util.Utility.prefixToPosFix(textField.getText());
                 String resultInfix = util.Utility.prefixToInfix(textField.getText());
-                textArea2.setText(resultInfix);
-                textArea1.setText(resultPost);
+                textArea1.setText(resultInfix);
+                textArea2.setText(resultPost);
             }
         }catch (StackException e){
             alert.setAlertType(Alert.AlertType.ERROR);
