@@ -3,10 +3,8 @@ package controller;
 import domain.StackException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 
 public class BaseConverterController {
 
@@ -44,6 +42,7 @@ public class BaseConverterController {
 
     @FXML
     void convertOnAction(ActionEvent event) {
+
         try {
             if (binaryRadioButton.isSelected()) {
                 String result = util.Utility.decimalToBinary(Integer.parseInt(textField.getText()));
@@ -57,6 +56,18 @@ public class BaseConverterController {
             }
         } catch (StackException e) {
             throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    void textFieldVerification(KeyEvent event) {
+        String character = event.getCharacter();
+        if (!character.matches("[0-9]")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid input");
+            alert.setHeaderText(null);
+            alert.setContentText("Most be a number.");
+            alert.showAndWait();
+            textField.clear();
         }
     }
 }

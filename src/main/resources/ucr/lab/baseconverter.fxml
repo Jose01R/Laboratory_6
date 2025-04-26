@@ -28,7 +28,7 @@
                   <Font name="Arial" size="19.0" />
                </font>
             </Text>
-            <TextField fx:id="textField" layoutX="207.0" layoutY="43.0" />
+            <TextField fx:id="textField" layoutX="207.0" layoutY="43.0" onKeyTyped="#textFieldVerification" />
             <Pane layoutX="14.0" layoutY="94.0" prefHeight="101.0" prefWidth="566.0" style="-fx-background-color: #b9c192;">
                <children>
                   <RadioButton fx:id="binaryRadioButton" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Binary">

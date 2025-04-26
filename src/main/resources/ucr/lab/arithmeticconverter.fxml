@@ -58,8 +58,8 @@
             </Pane>
             <Pane layoutX="13.0" layoutY="237.0" prefHeight="129.0" prefWidth="574.0" style="-fx-background-color: #afdb91;">
                <children>
-                  <TextArea fx:id="textAreaPrefix" layoutX="126.0" layoutY="13.0" prefHeight="39.0" prefWidth="365.0" />
-                  <TextArea fx:id="textAreaPostfix" layoutX="126.0" layoutY="66.0" prefHeight="39.0" prefWidth="365.0" />
+                  <TextArea fx:id="textArea1" layoutX="126.0" layoutY="13.0" prefHeight="39.0" prefWidth="365.0" />
+                  <TextArea fx:id="textArea2" layoutX="126.0" layoutY="66.0" prefHeight="39.0" prefWidth="365.0" />
                   <Label fx:id="labelPrefix" layoutX="57.0" layoutY="18.0" text="Prefix">
                      <font>
                         <Font size="20.0" />
